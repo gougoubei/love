@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💕</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: "Microsoft YaHei", sans-serif;
+        position: relative;
+    }
+
+    .barrage {
+        position: absolute;
+        padding: 6px 10px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #333;
+        white-space: nowrap;
+        animation: popUp 2s ease-in-out forwards;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        z-index: 1000;
+        opacity: 0;
+        transform: scale(0.8);
+        max-width: 90vw;
+        text-align: center;
+    }
+
+    @keyframes popUp {
+        0% {
+            opacity: 0;
+            transform: scale(0.5) translateY(20px);
+        }
+        20% {
+            opacity: 1;
+            transform: scale(1.05) translateY(0);
+        }
+        80% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: scale(0.8) translateY(-10px);
+        }
+    }
+
+    .title {
+        position: fixed;
+        top: 16px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: white;
+        font-size: 18px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        z-index: 999;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body>
+    <div class="title">💕代码在重复，思念在循环💕</div>
+
+    <script>
+        const tips = [
+            '💧 多喝水哦~', '😊 保持微笑呀', '✨ 每天都要元气满满',
+            '🍎 记得吃水果', '🌞 保持好心情', '❤️ 好好爱自己', 
+            '🤗 我想你了', '🌟 梦想成真', '🎂 孙艺阁生日快乐', 
+            '🛌 早点休息', '🍀 愿所有烦恼都消失', '🌙 别熬夜',
+            '🎂 孙艺阁生日快乐', '🧥 天冷了，多穿衣服',
+            '🎂 孙艺阁生日快乐', '🌈 好运连连', '🎯 心想事成',
+            '🎂 孙艺阁生日快乐', '🎵 天天好心情', '🎂 孙艺阁生日快乐'
+        ];
+
+        const colors = [
+            '#FFB6C1', '#87CEEB', '#90EE90', '#E6E6FA',
+            '#FFFFE0', '#DDA0DD', '#FF7F50', '#FFE4C4',
+            '#7FFFD4', '#FFE4E1', '#F0FFF0', '#FFF0F5'
+        ];
+
+        function createBarrage() {
+            const barrage = document.createElement('div');
+            barrage.className = 'barrage';
+
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+            barrage.textContent = randomTip;
+            barrage.style.backgroundColor = randomColor;
+
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            // 限制在 0%~100% 范围，但允许轻微偏移（±5%）
+            const left = (Math.random() * 1.1 - 0.05) * screenWidth;
+            const top = (Math.random() * 1.1 - 0.05) * screenHeight;
+
+            barrage.style.left = left + 'px';
+            barrage.style.top = top + 'px';
+
+            const duration = 2 + Math.random() * 2;
+            barrage.style.animationDuration = duration + 's';
+            barrage.style.animationDelay = (Math.random() * 0.5) + 's';
+
+            document.body.appendChild(barrage);
+
+            barrage.addEventListener('animationend', () => barrage.remove());
+        }
+
+        function startBarrage() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createBarrage, i * 10);
+            }
+            setInterval(createBarrage, 10);
+        }
+
+        window.onload = startBarrage;
+        document.body.addEventListener('click', createBarrage);
+    </script>
+</body>
+</html>
